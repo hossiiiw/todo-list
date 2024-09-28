@@ -8,7 +8,7 @@ const clearAllBtn = document.querySelector("#items-clear");
 // add item to list
 itemForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const inputValue = itemInput.value;
+  const inputValue = itemInput.value.toLowerCase();
 
   if (inputValue == "") {
     inputInvalid.innerHTML = "please add valid name for item";
@@ -55,5 +55,21 @@ function checkUi() {
     clearAllBtn.style.display = "block";
   }
 }
+
+//filter function
+filterBox.addEventListener("input", () => {
+  const items = listItems.querySelectorAll("li");
+  const filterInput = filterBox.value.toLowerCase();
+
+  items.forEach((item) => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+
+    if (itemName.indexOf(filterInput) !== -1) {
+      item.style.display = "flex";
+    } else {
+      item.style.display = "none";
+    }
+  });
+});
 
 checkUi();

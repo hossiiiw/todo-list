@@ -5,6 +5,22 @@ const listItems = document.querySelector("#item-list");
 const filterBox = document.querySelector("#filter");
 const clearAllBtn = document.querySelector("#items-clear");
 
+document.addEventListener("DOMContentLoaded", () => {
+  let todoName = getItemFromStorage();
+
+  todoName.forEach((item) => {
+    const itemName = document.createElement("li");
+    const itemIcon = document.createElement("i");
+    itemName.className = "list-item";
+    itemName.innerHTML = item;
+    itemIcon.className = "bi bi-x remove-item fs-5 text-danger";
+    itemName.append(itemIcon);
+    listItems.append(itemName);
+  });
+
+  checkUi();
+});
+
 // add item to list
 itemForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -32,16 +48,12 @@ itemForm.addEventListener("submit", (e) => {
 
 //add to local storage
 function addToLocalStorage(item) {
-  let todoNames;
-  if (localStorage.getItem("item") === null) {
-    todoNames = [];
-  } else {
-    todoNames = JSON.parse(localStorage.getItem("item"));
-  }
+  let todoNames = getItemFromStorage();
 
   todoNames.push(item);
   localStorage.setItem("item", JSON.stringify(todoNames));
 }
+
 //remove item
 listItems.addEventListener("click", (e) => {
   if (e.target.classList.contains("remove-item")) {
@@ -85,4 +97,15 @@ filterBox.addEventListener("input", () => {
   });
 });
 
+function getItemFromStorage() {
+  let todoName;
+
+  if (localStorage.getItem("item") === null) {
+    todoName = [];
+  } else {
+    todoName = JSON.parse(localStorage.getItem("item"));
+  }
+
+  return todoName;
+}
 checkUi();

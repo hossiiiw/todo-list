@@ -2,6 +2,8 @@ const itemForm = document.querySelector("#item-form");
 const itemInput = document.querySelector("#item-input");
 const inputInvalid = document.querySelector("#input-invalid");
 const listItems = document.querySelector("#item-list");
+
+// add item to list
 itemForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const inputValue = itemInput.value;
@@ -22,3 +24,5 @@ itemForm.addEventListener("submit", (e) => {
     itemInput.value = "";
   }
 });
+
+

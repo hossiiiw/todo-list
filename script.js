@@ -26,9 +26,22 @@ itemForm.addEventListener("submit", (e) => {
     itemInput.value = "";
 
     checkUi();
+    addToLocalStorage(inputValue);
   }
 });
 
+//add to local storage
+function addToLocalStorage(item) {
+  let todoNames;
+  if (localStorage.getItem("item") === null) {
+    todoNames = [];
+  } else {
+    todoNames = JSON.parse(localStorage.getItem("item"));
+  }
+
+  todoNames.push(item);
+  localStorage.setItem("item", JSON.stringify(todoNames));
+}
 //remove item
 listItems.addEventListener("click", (e) => {
   if (e.target.classList.contains("remove-item")) {

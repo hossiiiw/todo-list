@@ -19,5 +19,6 @@ itemForm.addEventListener("submit", (e) => {
     itemIcon.className = "bi bi-x fs-5 text-danger";
     itemName.append(itemIcon);
     listItems.append(itemName);
+    itemInput.value = "";
   }
 });

@@ -58,17 +58,23 @@ function addToLocalStorage(item) {
 listItems.addEventListener("click", (e) => {
   if (e.target.classList.contains("remove-item")) {
     e.target.parentElement.remove();
+    removeItemFromStorage(e.target.parentElement.textContent);
   }
-
   checkUi();
 });
 
 //remove all
 clearAllBtn.addEventListener("click", () => {
   listItems.innerHTML = "";
-
+  localStorage.removeItem("item");
   checkUi();
 });
+
+function removeItemFromStorage(item) {
+  let todoNames = getItemFromStorage();
+  todoNames = todoNames.filter((i) => i !== item);
+  localStorage.setItem("item", JSON.stringify(todoNames));
+}
 
 function checkUi() {
   const item = listItems.querySelectorAll("li");
